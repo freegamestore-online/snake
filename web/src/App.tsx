@@ -1,4 +1,6 @@
 import { Shell } from "./components/Shell";
+import { Leaderboard } from "./components/Leaderboard";
+import { useLeaderboard } from "./hooks/useLeaderboard";
 import { useCallback, useEffect, useRef, useState } from "react";
 
 type Direction = "UP" | "DOWN" | "LEFT" | "RIGHT";
@@ -34,12 +36,25 @@ export default function App() {
   const scoreRef = useRef(score);
   const gameOverRef = useRef(gameOver);
   const touchStartRef = useRef<{ x: number; y: number } | null>(null);
+  const { topScores, recentScores, submitScore, loading } = useLeaderboard("snake");
+  const submittedRef = useRef(false);
 
   directionRef.current = direction;
   snakeRef.current = snake;
   foodRef.current = food;
   scoreRef.current = score;
   gameOverRef.current = gameOver;
+
+  // Submit score on game over
+  useEffect(() => {
+    if (gameOver && !submittedRef.current) {
+      submittedRef.current = true;
+      submitScore(score);
+    }
+    if (!gameOver) {
+      submittedRef.current = false;
+    }
+  }, [gameOver, score, submitScore]);
 
   const resetGame = useCallback(() => {
     const initialSnake = [{ x: 10, y: 10 }];
@@ -173,7 +188,16 @@ export default function App() {
   }, [started, gameOver, score]);
 
   return (
-    <Shell>
+    <Shell
+      sidebar={
+        <nav className="flex-1 px-4 flex flex-col gap-3 py-4 overflow-auto">
+          <div className="mt-2 border-t" style={{ borderColor: "var(--line)" }}>
+            <div className="text-xs font-semibold px-4 pt-3" style={{ color: "var(--muted)" }}>Leaderboard</div>
+            <Leaderboard topScores={topScores} recentScores={recentScores} loading={loading} />
+          </div>
+        </nav>
+      }
+    >
       <div className="flex flex-col items-center gap-4">
         <h1
           className="text-3xl font-bold"
