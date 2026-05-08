@@ -27,7 +27,7 @@ export default function App() {
   const [direction, setDirection] = useState<Direction>("RIGHT");
   const [gameOver, setGameOver] = useState(false);
   const [score, setScore] = useState(0);
-  const [started, setStarted] = useState(false);
+  const [started, setStarted] = useState(true);
   const [paused, setPaused] = useState(false);
 
   const directionRef = useRef<Direction>(direction);
