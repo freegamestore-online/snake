@@ -192,8 +192,24 @@ export default function App() {
         <GameTopbar
           title="Snake"
           score={score}
-        actions={<GameAuth />}
-          />
+          rules={
+            <div>
+              <h3 style={{marginBottom:'0.5rem',fontWeight:700}}>Snake</h3>
+              <p>Eat food to grow your snake as long as you can.</p>
+              <h4 style={{marginTop:'0.75rem',fontWeight:600}}>Controls</h4>
+              <ul style={{paddingLeft:'1.2rem',marginTop:'0.25rem'}}>
+                <li>Arrow keys to change direction</li>
+                <li>Swipe on mobile</li>
+              </ul>
+              <h4 style={{marginTop:'0.75rem',fontWeight:600}}>Rules</h4>
+              <ul style={{paddingLeft:'1.2rem',marginTop:'0.25rem'}}>
+                <li>Don't hit the walls or yourself</li>
+                <li>Speed increases as you eat more</li>
+              </ul>
+            </div>
+          }
+          actions={<GameAuth />}
+        />
       }
     >
       <div className="relative w-full h-full flex flex-col items-center gap-4 justify-center">
