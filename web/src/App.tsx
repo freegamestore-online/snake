@@ -1,4 +1,4 @@
-import { GameShell, GameTopbar } from "@freeappstore/games";
+import { GameShell, GameTopbar } from "@freegamestore/games";
 import { useLeaderboard } from "./hooks/useLeaderboard";
 import { useCallback, useEffect, useRef, useState } from "react";
 
