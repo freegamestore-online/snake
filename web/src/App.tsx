@@ -1,5 +1,4 @@
-import { Shell } from "./components/Shell";
-import { Leaderboard } from "./components/Leaderboard";
+import { GameShell, GameTopbar } from "@freeappstore/games";
 import { useLeaderboard } from "./hooks/useLeaderboard";
 import { useCallback, useEffect, useRef, useState } from "react";
 
@@ -36,7 +35,7 @@ export default function App() {
   const scoreRef = useRef(score);
   const gameOverRef = useRef(gameOver);
   const touchStartRef = useRef<{ x: number; y: number } | null>(null);
-  const { topScores, recentScores, submitScore, loading } = useLeaderboard("snake");
+  const { submitScore } = useLeaderboard("snake");
   const submittedRef = useRef(false);
 
   directionRef.current = direction;
@@ -188,30 +187,15 @@ export default function App() {
   }, [started, gameOver, score]);
 
   return (
-    <Shell
-      sidebar={
-        <nav className="flex-1 px-4 flex flex-col gap-3 py-4 overflow-auto">
-          <div className="mt-2 border-t" style={{ borderColor: "var(--line)" }}>
-            <div className="text-xs font-semibold px-4 pt-3" style={{ color: "var(--muted)" }}>Leaderboard</div>
-            <Leaderboard topScores={topScores} recentScores={recentScores} loading={loading} />
-          </div>
-        </nav>
+    <GameShell
+      topbar={
+        <GameTopbar
+          title="Snake"
+          score={score}
+        />
       }
     >
-      <div className="flex flex-col items-center gap-4">
-        <h1
-          className="text-3xl font-bold"
-          style={{ fontFamily: "Fraunces, serif", color: "var(--ink)" }}
-        >
-          Snake
-        </h1>
-        <div
-          className="text-xl font-semibold"
-          style={{ fontFamily: "Fraunces, serif", color: "var(--ink)" }}
-        >
-          Score: {score}
-        </div>
-
+      <div className="relative w-full h-full flex flex-col items-center gap-4 justify-center">
         <div
           style={{
             display: "grid",
@@ -311,6 +295,6 @@ export default function App() {
           </button>
         </div>
       </div>
-    </Shell>
+    </GameShell>
   );
 }
