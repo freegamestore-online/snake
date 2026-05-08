@@ -1,4 +1,4 @@
-import { GameShell, GameTopbar, GameAuth } from "@freegamestore/games";
+import { GameShell, GameTopbar, GameAuth, useGameSounds } from "@freegamestore/games";
 import { useLeaderboard } from "./hooks/useLeaderboard";
 import { useCallback, useEffect, useRef, useState } from "react";
 
@@ -38,6 +38,9 @@ export default function App() {
   const touchStartRef = useRef<{ x: number; y: number } | null>(null);
   const { submitScore } = useLeaderboard("snake");
   const submittedRef = useRef(false);
+  const sounds = useGameSounds();
+  const soundsRef = useRef(sounds);
+  soundsRef.current = sounds;
 
   directionRef.current = direction;
   snakeRef.current = snake;
@@ -164,12 +167,14 @@ export default function App() {
         newHead.y < 0 ||
         newHead.y >= GRID_SIZE
       ) {
+        soundsRef.current.playGameOver();
         setGameOver(true);
         return;
       }
 
       // Check self collision
       if (currentSnake.some((s) => s.x === newHead.x && s.y === newHead.y)) {
+        soundsRef.current.playGameOver();
         setGameOver(true);
         return;
       }
@@ -183,6 +188,7 @@ export default function App() {
         const newScore = scoreRef.current + 1;
         setScore(newScore);
         setFood(getRandomPosition(newSnake));
+        soundsRef.current.playScore();
       }
       setSnake(newSnake);
     }, speed);
