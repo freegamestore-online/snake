@@ -27,7 +27,7 @@ export default function App() {
   const [direction, setDirection] = useState<Direction>("RIGHT");
   const [gameOver, setGameOver] = useState(false);
   const [score, setScore] = useState(0);
-  const [started, setStarted] = useState(true);
+  const [started, setStarted] = useState(false);
   const [paused, setPaused] = useState(false);
 
   const directionRef = useRef<Direction>(direction);
@@ -256,6 +256,19 @@ export default function App() {
             );
           })}
         </div>
+
+        {!started && !gameOver && (
+          <div
+            className="absolute inset-0 flex items-center justify-center cursor-pointer"
+            style={{ background: "rgba(0,0,0,0.3)" }}
+            onClick={resetGame}
+          >
+            <div className="text-center">
+              <div className="text-lg font-bold mb-1" style={{ color: "#fff" }}>Tap to play</div>
+              <div className="text-xs" style={{ color: "rgba(255,255,255,0.6)" }}>Swipe or arrow keys to move</div>
+            </div>
+          </div>
+        )}
 
         {gameOver && (
           <div className="text-center">
