@@ -265,19 +265,6 @@ export default function App() {
           </div>
         )}
 
-        {!started && (
-          <button
-            onClick={resetGame}
-            className="px-4 py-2 rounded font-semibold min-h-[2.75rem] min-w-[2.75rem]"
-            style={{
-              background: "var(--accent)",
-              color: "var(--panel)",
-            }}
-          >
-            Start Game
-          </button>
-        )}
-
         {/* Mobile directional buttons */}
         <div className="grid grid-cols-3 gap-2 mt-4" style={{ width: "180px" }}>
           <div />
