@@ -1,4 +1,4 @@
-import { GameShell, GameTopbar } from "@freegamestore/games";
+import { GameShell, GameTopbar, GameAuth } from "@freegamestore/games";
 import { useLeaderboard } from "./hooks/useLeaderboard";
 import { useCallback, useEffect, useRef, useState } from "react";
 
@@ -192,7 +192,8 @@ export default function App() {
         <GameTopbar
           title="Snake"
           score={score}
-        />
+        actions={<GameAuth />}
+          />
       }
     >
       <div className="relative w-full h-full flex flex-col items-center gap-4 justify-center">
