@@ -28,6 +28,7 @@ export default function App() {
   const [gameOver, setGameOver] = useState(false);
   const [score, setScore] = useState(0);
   const [started, setStarted] = useState(false);
+  const [paused, setPaused] = useState(false);
 
   const directionRef = useRef<Direction>(direction);
   const snakeRef = useRef<Position[]>(snake);
@@ -125,13 +126,16 @@ export default function App() {
     };
   }, [changeDirection]);
 
+  const pausedRef = useRef(paused);
+  pausedRef.current = paused;
+
   // Game loop
   useEffect(() => {
-    if (!started || gameOver) return;
+    if (!started || gameOver || paused) return;
 
     const speed = Math.max(MIN_SPEED, INITIAL_SPEED - score * SPEED_DECREASE);
     const interval = setInterval(() => {
-      if (gameOverRef.current) return;
+      if (gameOverRef.current || pausedRef.current) return;
 
       const currentSnake = snakeRef.current;
       const head = currentSnake[0];
@@ -184,7 +188,7 @@ export default function App() {
     }, speed);
 
     return () => clearInterval(interval);
-  }, [started, gameOver, score]);
+  }, [started, gameOver, paused, score]);
 
   return (
     <GameShell
@@ -208,6 +212,9 @@ export default function App() {
               </ul>
             </div>
           }
+          onPlayPause={started && !gameOver ? () => setPaused(p => !p) : undefined}
+          paused={paused}
+          onRestart={resetGame}
           actions={<GameAuth />}
         />
       }
