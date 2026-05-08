@@ -254,7 +254,7 @@ export default function App() {
             </p>
             <button
               onClick={resetGame}
-              className="px-4 py-2 rounded font-semibold"
+              className="px-4 py-2 rounded font-semibold min-h-[2.75rem] min-w-[2.75rem]"
               style={{
                 background: "var(--accent)",
                 color: "var(--panel)",
@@ -268,7 +268,7 @@ export default function App() {
         {!started && (
           <button
             onClick={resetGame}
-            className="px-4 py-2 rounded font-semibold"
+            className="px-4 py-2 rounded font-semibold min-h-[2.75rem] min-w-[2.75rem]"
             style={{
               background: "var(--accent)",
               color: "var(--panel)",
@@ -283,7 +283,7 @@ export default function App() {
           <div />
           <button
             onClick={() => changeDirection("UP")}
-            className="p-3 rounded font-bold text-lg"
+            className="p-3 rounded font-bold text-lg min-h-[2.75rem] min-w-[2.75rem]"
             style={{ background: "var(--line)", color: "var(--ink)" }}
           >
             ^
@@ -291,21 +291,21 @@ export default function App() {
           <div />
           <button
             onClick={() => changeDirection("LEFT")}
-            className="p-3 rounded font-bold text-lg"
+            className="p-3 rounded font-bold text-lg min-h-[2.75rem] min-w-[2.75rem]"
             style={{ background: "var(--line)", color: "var(--ink)" }}
           >
             &lt;
           </button>
           <button
             onClick={() => changeDirection("DOWN")}
-            className="p-3 rounded font-bold text-lg"
+            className="p-3 rounded font-bold text-lg min-h-[2.75rem] min-w-[2.75rem]"
             style={{ background: "var(--line)", color: "var(--ink)" }}
           >
             v
           </button>
           <button
             onClick={() => changeDirection("RIGHT")}
-            className="p-3 rounded font-bold text-lg"
+            className="p-3 rounded font-bold text-lg min-h-[2.75rem] min-w-[2.75rem]"
             style={{ background: "var(--line)", color: "var(--ink)" }}
           >
             &gt;
