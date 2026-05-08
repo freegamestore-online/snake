@@ -279,7 +279,7 @@ export default function App() {
         )}
 
         {/* Mobile directional buttons */}
-        <div className="grid grid-cols-3 gap-2 mt-4 md:hidden" style={{ width: "180px" }}>
+        <div className="grid grid-cols-3 gap-2 mt-4" style={{ width: "180px" }}>
           <div />
           <button
             onClick={() => changeDirection("UP")}
