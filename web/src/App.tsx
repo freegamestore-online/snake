@@ -1,5 +1,5 @@
 import { GameShell, GameTopbar, GameAuth, useGameSounds } from "@freegamestore/games";
-import { useLeaderboard } from "./hooks/useLeaderboard";
+import { useLeaderboard } from '@freegamestore/games';
 import { useCallback, useEffect, useRef, useState } from "react";
 
 type Direction = "UP" | "DOWN" | "LEFT" | "RIGHT";
